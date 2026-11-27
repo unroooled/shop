@@ -6,6 +6,7 @@ import {
   STUDIO_STEPS,
 } from '../data/shopData';
 import {
+  CartItem,
   ClayProduct,
   CommissionTicket,
   PageView,
@@ -25,6 +26,7 @@ interface ShopDropsViewProps {
     ticket: Omit<CommissionTicket, 'id' | 'createdAt' | 'estimatedPrice'>
   ) => CommissionTicket;
   recentTickets: CommissionTicket[];
+  cartItems?: CartItem[];
 }
 
 const CATEGORIES: { id: ProductCategory; label: string }[] = [
@@ -42,6 +44,7 @@ export function ShopDropsView({
   onNavigate,
   onSubmitTicket,
   recentTickets,
+  cartItems = [],
 }: ShopDropsViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all');
   const [showAllDrops, setShowAllDrops] = useState<boolean>(false);
@@ -351,16 +354,29 @@ export function ShopDropsView({
                     </span>
                     <span>{product.footerText}</span>
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => onAddToCart(product)}
-                    className="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-sm lowercase shadow-[2px_2px_0px_#1b1836] hover:bg-primary hover:text-on-primary active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center gap-1 whitespace-nowrap"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">
-                      add_shopping_cart
-                    </span>
-                    <span>claim set</span>
-                  </button>
+                  {(() => {
+                    const inCart = cartItems.find((c) => c.id === product.id);
+                    return (
+                      <button
+                        type="button"
+                        onClick={() => onAddToCart(product)}
+                        className={`px-4 py-2 rounded-full font-label-sm lowercase shadow-[2px_2px_0px_#1b1836] active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center gap-1 whitespace-nowrap ${
+                          inCart
+                            ? 'bg-primary text-on-primary hover:bg-primary/80'
+                            : 'bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary'
+                        }`}
+                      >
+                        <span className="material-symbols-outlined text-[16px]">
+                          {inCart ? 'shopping_cart' : 'add_shopping_cart'}
+                        </span>
+                        {inCart ? (
+                          <span>in cart ({inCart.quantity}) +</span>
+                        ) : (
+                          <span>claim set</span>
+                        )}
+                      </button>
+                    );
+                  })()}
                 </div>
               </div>
             </div>

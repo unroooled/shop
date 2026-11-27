@@ -166,6 +166,7 @@ export default function App() {
             onNavigate={setActivePage}
             onSubmitTicket={handleSubmitTicket}
             recentTickets={tickets}
+            cartItems={cartItems}
           />
         )}
 
