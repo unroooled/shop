@@ -1,20 +1,22 @@
 import { ClayProduct, PastProject } from '../types';
 
+const b = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export const IMAGES = {
-  logo: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_12.54.14_04086d61.jpeg',
-  mascot: '/assets/aistudio/WhatsApp_Image_2026-11-27_at_12.54.14_04086d61.jpeg',
+  logo: `${b}/assets/aistudio/WhatsApp_Image_2026-11-27_at_12.54.14_04086d61.jpeg`,
+  mascot: `${b}/assets/aistudio/WhatsApp_Image_2026-11-27_at_12.54.14_04086d61.jpeg`,
   // real delivered-order photos below
-  magnetTrio: '/assets/real/6.jpg',       // no-face + kuromi clay magnets
-  pinBadges: '/assets/real/2.jpg',        // #swag / sadie / dina badges on denim
-  studioHands: '/assets/real/10.jpg',     // messy studio table with paint pots
-  corgiMagnets: '/assets/real/8.jpg',     // penguin + calico-cat painted rock badges
-  hellokittyBatman: '/assets/real/1.jpg', // hello kitty + batman clay heads
-  womanPortrait: '/assets/real/3.jpg',    // hand-held woman face portrait stone
-  maggieKeychain: '/assets/real/4.jpg',   // pink "maggie" charm pendant
-  bunnyEarmuffs: '/assets/real/5.jpg',    // white bunny with teal earmuffs figure
-  foodMiniature: '/assets/real/7.jpg',    // tiny indian food plate miniature
-  venomLighter: '/assets/real/9.jpg',     // venom face lighter sleeve
-  turtleLily: '/assets/real/11.jpg',      // green turtle + stargazer lily keychain
+  magnetTrio: `${b}/assets/real/6.jpg`,       // no-face + kuromi clay magnets
+  pinBadges: `${b}/assets/real/2.jpg`,        // #swag / sadie / dina badges on denim
+  studioHands: `${b}/assets/real/10.jpg`,     // messy studio table with paint pots
+  corgiMagnets: `${b}/assets/real/8.jpg`,     // penguin + calico-cat painted rock badges
+  hellokittyBatman: `${b}/assets/real/1.jpg`, // hello kitty + batman clay heads
+  womanPortrait: `${b}/assets/real/3.jpg`,    // hand-held woman face portrait stone
+  maggieKeychain: `${b}/assets/real/4.jpg`,   // pink "maggie" charm pendant
+  bunnyEarmuffs: `${b}/assets/real/5.jpg`,    // white bunny with teal earmuffs figure
+  foodMiniature: `${b}/assets/real/7.jpg`,    // tiny indian food plate miniature
+  venomLighter: `${b}/assets/real/9.jpg`,     // venom face lighter sleeve
+  turtleLily: `${b}/assets/real/11.jpg`,      // green turtle + stargazer lily keychain
 };
 
 export const CLAY_PRODUCTS: ClayProduct[] = [
@@ -332,56 +334,56 @@ export const PAST_PROJECTS: PastProject[] = [
 export const TESTIMONIALS = [
   {
     id: 'tw1',
-    image: '/assets/real/13.jpg',
+    image: `${b}/assets/real/13.jpg`,
     quote: 'Sooo cuteee 😭😭 look how my mom arranged them hahha',
     product: 'family face badges',
     rotation: 'sm:-rotate-1',
   },
   {
     id: 'tw2',
-    image: '/assets/real/12.jpg',
+    image: `${b}/assets/real/12.jpg`,
     quote: 'The pins are bigger than i imagined haha!! And very very cute 😭😭😭 Really made my day',
     product: 'custom badges',
     rotation: 'sm:rotate-2',
   },
   {
     id: 'tw3',
-    image: '/assets/real/18.jpg',
+    image: `${b}/assets/real/18.jpg`,
     quote: 'They are so fickin cutee 😭😭😭😭 Absolutely loved themm. Packaging is also so good',
     product: 'kuromi + no-face badges',
     rotation: 'sm:-rotate-2',
   },
   {
     id: 'tw4',
-    image: '/assets/real/19.jpg',
+    image: `${b}/assets/real/19.jpg`,
     quote: 'Thank you @unroooled for the little package 😍 I looooooove the keychain, it\'s very cute 💜',
     product: 'maggie name keychain',
     rotation: 'sm:rotate-1',
   },
   {
     id: 'tw5',
-    image: '/assets/real/14.jpg',
+    image: `${b}/assets/real/14.jpg`,
     quote: 'These are sooo cute 🥰 I love them',
     product: 'glasses guy + owl badges',
     rotation: 'sm:-rotate-1',
   },
   {
     id: 'tw6',
-    image: '/assets/real/16.jpg',
+    image: `${b}/assets/real/16.jpg`,
     quote: 'LOVEEE THEM SO MUCHHH 😝 He has it on his bag and i have it on my id',
     product: 'penguin pin badge',
     rotation: 'sm:rotate-2',
   },
   {
     id: 'tw7',
-    image: '/assets/real/17.jpg',
+    image: `${b}/assets/real/17.jpg`,
     quote: '"Im sorry I didn\'t like it" → "I LOOOOOVEEEEEEE THEMMMMMMM 😭😭😭😭"',
     product: 'custom badge order',
     rotation: 'sm:-rotate-2',
   },
   {
     id: 'tw8',
-    image: '/assets/real/15.jpg',
+    image: `${b}/assets/real/15.jpg`,
     quote: 'this was very pretty and the packaging as well, thank you 😊',
     product: 'face badge',
     rotation: 'sm:rotate-1',
