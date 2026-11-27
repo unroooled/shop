@@ -1,4 +1,6 @@
 import { FormEvent, useState } from 'react';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/unroooled@gmail.com';
 import { CartItem } from '../types';
 import { ResilientImage } from './ResilientImage';
 
@@ -30,6 +32,7 @@ export function CartDrawer({
   const [customerHandle, setCustomerHandle] = useState('');
   const [shippingAddress, setShippingAddress] = useState('');
   const [orderId, setOrderId] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
@@ -52,11 +55,50 @@ export function CartDrawer({
     }
   };
 
-  const handleConfirmOrder = (e: FormEvent) => {
+  const handleConfirmOrder = async (e: FormEvent) => {
     e.preventDefault();
     const newId = `UNR-${Math.floor(1000 + Math.random() * 9000)}`;
+    setSubmitting(true);
+
+    const itemLines = items
+      .map((item) => `  • ${item.name} × ${item.quantity}  =  ₹${item.price * item.quantity}`)
+      .join('\n');
+
+    const body = `
+🛍 NEW ORDER from unroooled.shop
+
+Order ID : ${newId}
+─────────────────────────
+${itemLines}
+─────────────────────────
+Subtotal : ₹${subtotal}${discount > 0 ? `\nDiscount : -₹${discount} (CLAYCLUB10)` : ''}${shippingCost > 0 ? `\nShipping : ₹${shippingCost}` : '\nShipping : FREE'}
+TOTAL    : ₹${total}
+─────────────────────────
+Name     : ${customerName}
+Email    : ${customerEmail}
+Instagram: ${customerHandle || '—'}
+Address  : ${shippingAddress}
+─────────────────────────
+Reply to this email or DM ${customerHandle || customerName} on Instagram to confirm.
+`.trim();
+
+    try {
+      await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          subject: `New order ${newId} — ₹${total} — ${customerName}`,
+          message: body,
+          _replyto: customerEmail,
+        }),
+      });
+    } catch {
+      // fail silently — order still confirms for the customer
+    }
+
     setOrderId(newId);
     setCheckoutStep('confirmed');
+    setSubmitting(false);
     onClearCart();
   };
 
@@ -385,10 +427,20 @@ export function CartDrawer({
               <button
                 type="submit"
                 form="checkout-form"
-                className="w-full py-3.5 rounded-full bg-primary-container text-on-primary-container font-label-lg lowercase shadow-[3px_3px_0px_#1b1836] hover:bg-primary active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+                disabled={submitting}
+                className="w-full py-3.5 rounded-full bg-primary-container text-on-primary-container font-label-lg lowercase shadow-[3px_3px_0px_#1b1836] hover:bg-primary active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <span>place handmade order ✿</span>
-                <span className="material-symbols-outlined text-[18px]">check</span>
+                {submitting ? (
+                  <>
+                    <span>sending order…</span>
+                    <span className="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>
+                  </>
+                ) : (
+                  <>
+                    <span>place handmade order ✿</span>
+                    <span className="material-symbols-outlined text-[18px]">check</span>
+                  </>
+                )}
               </button>
             )}
           </div>
