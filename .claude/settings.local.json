@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/ram/Downloads/zip/public/assets/real && cp /private/tmp/claude-501/-Users-ram-Downloads-zip/93fa68b5-4a1f-4238-97ff-7aa5765cfb1b/images/*.jpg /Users/ram/Downloads/zip/public/assets/real/ && ls /Users/ram/Downloads/zip/public/assets/real/)",
+      "Bash(npm install *)",
+      "Bash(npm install-scripts *)",
+      "Read(//Users/ram/Downloads/**)",
+      "Bash(zip -r unroooled-site.zip zip/ --exclude \"zip/node_modules/*\" --exclude \"zip/dist/*\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

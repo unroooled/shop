@@ -1,0 +1,6 @@
+{
+  "name": "unroooled — handmade clay shop & custom badges",
+  "description": "Handcrafted squishy polymer clay fridge magnets, chunky pin badges, custom pet avatars, and kiln-fired serotonin charms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
